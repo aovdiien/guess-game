@@ -1,0 +1,15 @@
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  .hint {
+    color: black;
+    text-align: center;
+
+    &:hover {
+      color: white;
+    }
+  }
+}

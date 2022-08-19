@@ -1,0 +1,14 @@
+.litmus {
+  height: 12vh;
+  font-size: 12vh;
+  text-align: center;
+  color: white;
+
+  &.correct {
+    color: lime;
+  }
+
+  &.wrong {
+    color: red;
+  }
+}

@@ -1,0 +1,25 @@
+.digit-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  label {
+    color: white;
+    font-size: 6vh;
+    text-align: center;
+  }
+
+  input {
+    color: yellow;
+    font-size: 20vh;
+    text-align: center;
+    background-color: black;
+    border: none;
+
+    &:focus,
+    &:focus-visible {
+      border: none;
+      outline: none;
+    }
+  }
+}
