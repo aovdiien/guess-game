@@ -1,14 +1,80 @@
+$check-mark-stroke-dasharray: 1859.446289062;
+$cross-mark-line-one-stroke-dasharray: 193.9647979736328;
+$cross-mark-line-two-stroke-dasharray: 243.2846221923828;
+
+@mixin draw($stroke-dashoffset-from) {
+  from {
+    stroke-dashoffset: $stroke-dashoffset-from;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@mixin fill-in {
+  from {
+    fill-opacity: 0;
+  }
+  to {
+    fill-opacity: 1;
+  }
+}
+
 .litmus {
   height: 12vh;
   font-size: 12vh;
-  text-align: center;
   color: white;
+
+  svg {
+    height: 12vh;
+  }
 
   &.correct {
     color: lime;
+    stroke: yellow;
+    fill: lime;
+    transform: scale(2);
+    stroke-dasharray: $check-mark-stroke-dasharray;
+    animation: draw-check 0.5s linear, fill-in-check-mark 1s linear;
   }
 
   &.wrong {
     color: red;
+    stroke: red;
+    transform: scale(2);
+
+    .line-one {
+      fill: red;
+      stroke-dasharray: $cross-mark-line-one-stroke-dasharray;
+      animation: draw-cross-line-one 0.5s linear, fill-in-cross-line-one 1s linear;
+    }
+
+    .line-two {
+      fill: red;
+      stroke-dasharray: $cross-mark-line-two-stroke-dasharray;
+      animation: draw-cross-line-two 0.5s linear, fill-in-cross-line-two 1s linear;
+    }
   }
+}
+
+@keyframes draw-check {
+  @include draw($check-mark-stroke-dasharray);
+}
+
+@keyframes draw-cross-line-one {
+  @include draw($cross-mark-line-one-stroke-dasharray);
+}
+
+@keyframes draw-cross-line-two {
+  @include draw($cross-mark-line-two-stroke-dasharray);
+}
+
+@keyframes fill-in-check-mark {
+  @include fill-in;
+}
+@keyframes fill-in-cross-line-one {
+  @include fill-in;
+}
+@keyframes fill-in-cross-line-two {
+  @include fill-in;
 }

@@ -18,6 +18,8 @@ class App extends Component {
       digitInputValue: null,
       currentRandomGuess: getRandomFourDigitsString()
     };
+
+    this.onInputChange = this.onInputChange.bind(this);
   }
 
   resetGame(value) {
@@ -59,8 +61,9 @@ class App extends Component {
           <FireworksEffect />
         )}
         <div className="hint">{gameRoundCount} - {currentRandomGuess}</div>
+        <div className="game-count">Game #{gameRoundCount}</div>
         <DigitInput
-          onInputChange={this.onInputChange.bind(this)}
+          onInputChange={this.onInputChange}
           value={digitInputValue ?? ''}
         />
         <Litmus isCorrect={this.areEnteredDigitsCorrect()} />

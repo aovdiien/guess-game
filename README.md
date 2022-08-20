@@ -1,6 +1,12 @@
-# Getting Started with Create React App
+# Guess 4-Digit Number GAME
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The simple, yet vivid and interactive game to guess a 4-digit number.
+Computer generates a random 4-digit number every new round of game. You type numbers in.
+If the number is correct, then you are informed by a green check-mark, if the typed-in number is wrong,
+you are informed by a red cross-mark. Whenever you get full 4-digit number match,
+a fireworks display indicating that you won the game is shown! :)
+
+The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 

@@ -4,9 +4,13 @@
   flex-direction: column;
   justify-content: space-around;
 
+  .game-count {
+    color: white;
+    font-size: 3vh;
+  }
+
   .hint {
     color: black;
-    text-align: center;
 
     &:hover {
       color: white;

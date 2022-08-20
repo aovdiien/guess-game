@@ -9,7 +9,7 @@ class DigitInput extends PureComponent {
 
     return (
       <div className="digit-input-wrapper">
-        <label htmlFor="guess-digit">Guess a Digit</label>
+        <label htmlFor="guess-digit">Guess a 4-Digit Number</label>
         <input id="guess-digit" value={value} onChange={(event) => onInputChange(event.target.value)} />
       </div>
     );
