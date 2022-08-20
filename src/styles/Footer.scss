@@ -1,0 +1,7 @@
+@use './constants';
+
+.footer {
+  margin-top: auto;
+  color: white;
+  height: constants.$footer-height;
+}

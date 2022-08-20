@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component, Fragment} from 'react';
 
 import { getRandomFourDigitsString } from '../utils';
 import DigitInput from './DigitInput';
 import Litmus from './Litmus';
 import FireworksEffect from './FireworksEffect';
+import Footer from './Footer';
 
 import '../styles/App.scss';
 
@@ -56,18 +57,19 @@ class App extends Component {
     const { currentRandomGuess, digitInputValue, gameRoundCount } = this.state;
 
     return (
-      <div className="App">
-        {digitInputValue?.length === DIGIT_LENGTH && digitInputValue === currentRandomGuess && (
-          <FireworksEffect />
-        )}
-        <div className="hint">{gameRoundCount} - {currentRandomGuess}</div>
-        <div className="game-count">Game #{gameRoundCount}</div>
-        <DigitInput
-          onInputChange={this.onInputChange}
-          value={digitInputValue ?? ''}
-        />
-        <Litmus isCorrect={this.areEnteredDigitsCorrect()} />
-      </div>
+      <Fragment>
+        <div className="App">
+          {digitInputValue?.length === DIGIT_LENGTH && digitInputValue === currentRandomGuess && (
+            <FireworksEffect />
+          )}
+          <DigitInput
+            onInputChange={this.onInputChange}
+            value={digitInputValue ?? ''}
+          />
+          <Litmus isCorrect={this.areEnteredDigitsCorrect()} />
+        </div>
+        <Footer gameCount={gameRoundCount} />
+      </Fragment>
     );
   }
 }
