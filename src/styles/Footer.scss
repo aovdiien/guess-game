@@ -4,4 +4,22 @@
   margin-top: auto;
   color: white;
   height: constants.$footer-height;
+
+  span {
+    margin-right: 10px;
+
+    &.hint {
+      animation: 1s show-hint linear;
+    }
+  }
+}
+
+@keyframes show-hint {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }

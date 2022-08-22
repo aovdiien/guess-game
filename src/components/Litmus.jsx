@@ -13,7 +13,7 @@ class Litmus extends PureComponent {
     const renderText = isCorrect ? <CheckMark /> : <CrossMark />;
 
     return (
-      <div className={classNames('litmus' , isCorrect ? 'correct' : 'wrong')}>
+      <div className={classNames('litmus', isCorrect ? 'correct' : 'wrong')}>
         {isCorrect !== null && renderText}
       </div>
     );
@@ -22,6 +22,6 @@ class Litmus extends PureComponent {
 
 Litmus.props = {
   isCorrect: PropTypes.bool
-}
+};
 
 export default Litmus;

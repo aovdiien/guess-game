@@ -7,12 +7,16 @@ $box-shadow: ();
 $box-shadow2: ();
 @for $i from 0 through $particles {
   $box-shadow: $box-shadow,
-  random($width)-$width / 2 + px
-  random($height)-$height / 1.2 + px
-  hsl(random(360), 100, 50);
-  $box-shadow2: $box-shadow2, 0 0 #fff
+    random($width)-$width /
+      2 +
+      px
+      random($height)-$height /
+      1.2 +
+      px
+      hsl(random(360), 100, 50);
+  $box-shadow2: $box-shadow2, 0 0 #fff;
 }
-@mixin keyframes ($animationName) {
+@mixin keyframes($animationName) {
   @-webkit-keyframes #{$animationName} {
     @content;
   }
@@ -34,7 +38,7 @@ $box-shadow2: ();
   }
 }
 
-@mixin animation-delay ($settings) {
+@mixin animation-delay($settings) {
   -moz-animation-delay: $settings;
   -webkit-animation-delay: $settings;
   -o-animation-delay: $settings;
@@ -42,7 +46,7 @@ $box-shadow2: ();
   animation-delay: $settings;
 }
 
-@mixin animation-duration ($settings) {
+@mixin animation-duration($settings) {
   -moz-animation-duration: $settings;
   -webkit-animation-duration: $settings;
   -o-animation-duration: $settings;
@@ -50,7 +54,7 @@ $box-shadow2: ();
   animation-duration: $settings;
 }
 
-@mixin animation ($settings) {
+@mixin animation($settings) {
   -moz-animation: $settings;
   -webkit-animation: $settings;
   -o-animation: $settings;
@@ -58,7 +62,7 @@ $box-shadow2: ();
   animation: $settings;
 }
 
-@mixin transform ($settings) {
+@mixin transform($settings) {
   transform: $settings;
   -moz-transform: $settings;
   -webkit-transform: $settings;
@@ -66,13 +70,24 @@ $box-shadow2: ();
   -ms-transform: $settings;
 }
 
-.pyro > .before, .pyro > .after {
+.fireworks-effect {
+  margin-top: -10px;
+}
+
+.pyro > .before,
+.pyro > .after {
   position: absolute;
   width: 5px;
   height: 5px;
   border-radius: 50%;
   box-shadow: $box-shadow2;
-  @include animation((1s bang ease-out infinite backwards, 1s gravity ease-in infinite backwards, 5s position linear infinite backwards));
+  @include animation(
+    (
+      1s bang ease-out infinite backwards,
+      1s gravity ease-in infinite backwards,
+      5s position linear infinite backwards
+    )
+  );
 }
 
 .pyro > .after {
@@ -82,11 +97,11 @@ $box-shadow2: ();
 
 @include keyframes(bang) {
   to {
-    box-shadow:$box-shadow;
+    box-shadow: $box-shadow;
   }
 }
 
-@include keyframes(gravity)  {
+@include keyframes(gravity) {
   to {
     @include transform(translateY(200px));
     opacity: 0;
@@ -94,23 +109,28 @@ $box-shadow2: ();
 }
 
 @include keyframes(position) {
-  0%, 19.9% {
+  0%,
+  19.9% {
     margin-top: 10%;
     margin-left: 40%;
   }
-  20%, 39.9% {
+  20%,
+  39.9% {
     margin-top: 40%;
     margin-left: 30%;
   }
-  40%, 59.9% {
+  40%,
+  59.9% {
     margin-top: 20%;
-    margin-left: 70%
+    margin-left: 70%;
   }
-  60%, 79.9% {
+  60%,
+  79.9% {
     margin-top: 30%;
     margin-left: 20%;
   }
-  80%, 99.9% {
+  80%,
+  99.9% {
     margin-top: 30%;
     margin-left: 80%;
   }

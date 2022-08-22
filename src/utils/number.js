@@ -3,5 +3,4 @@ export const getRandomFourDigitsString = () => {
   const firstFourDigitsString = randomNumber.toString().slice(0, 4);
 
   return firstFourDigitsString;
-}
-
+};

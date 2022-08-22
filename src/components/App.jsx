@@ -1,6 +1,13 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { getRandomFourDigitsString } from '../utils';
+import {
+  initiateNewGame,
+  selectGameGuess,
+  selectGameRound,
+  selectGameHistory
+} from '../store/gameRegistrySlice';
 import DigitInput from './DigitInput';
 import Litmus from './Litmus';
 import FireworksEffect from './FireworksEffect';
@@ -8,37 +15,39 @@ import Footer from './Footer';
 
 import '../styles/App.scss';
 
-const DIGIT_LENGTH = 4;
+const DIGIT_LENGTH = 4; // 4 digits
+const SHOW_HINT_TIMEOUT_MS = 3000; // 3 seconds
 
 class App extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      gameRoundCount: 1,
       digitInputValue: null,
-      currentRandomGuess: getRandomFourDigitsString()
+      hint: null
     };
-
-    this.onInputChange = this.onInputChange.bind(this);
+    this.hintTimeout = null;
   }
 
   resetGame(value) {
+    const { digitInputValue } = this.state;
+
+    this.props.initiateNewGame(digitInputValue);
+
     this.setState({
-      gameRoundCount: this.state.gameRoundCount + 1,
-      digitInputValue: value[value.length - 1],
-      currentRandomGuess: getRandomFourDigitsString()
+      digitInputValue: value && value[value.length - 1]
     });
   }
 
   areEnteredDigitsCorrect() {
-    const { currentRandomGuess, digitInputValue } = this.state;
+    const { digitInputValue } = this.state;
+    const { gameGuess } = this.props;
 
     if (digitInputValue === null || digitInputValue === '') {
       return null;
     }
 
-    const randomGuessCompare = currentRandomGuess.slice(0, digitInputValue?.length);
+    const randomGuessCompare = gameGuess.slice(0, digitInputValue?.length);
 
     return randomGuessCompare === digitInputValue;
   }
@@ -53,25 +62,71 @@ class App extends Component {
     }
   }
 
+  onKeyDown(event) {
+    if (event?.key === 'h' || event?.key === 'H') {
+      clearTimeout(this.hintTimeout);
+
+      this.setState(
+        {
+          hint: this.state.hint === null ? this.props.gameGuess : null
+        },
+        () => {
+          if (this.state.hint !== null) {
+            this.hintTimeout = setTimeout(() => {
+              this.setState({ hint: null });
+            }, SHOW_HINT_TIMEOUT_MS);
+          }
+        }
+      );
+    }
+
+    if (
+      event?.key === 'Enter' &&
+      this.state.digitInputValue?.length === DIGIT_LENGTH
+    ) {
+      this.resetGame(null);
+    }
+  }
+
   render() {
-    const { currentRandomGuess, digitInputValue, gameRoundCount } = this.state;
+    const { digitInputValue, hint } = this.state;
+    const { gameGuess, gameHistory, gameRound } = this.props;
 
     return (
       <Fragment>
-        <div className="App">
-          {digitInputValue?.length === DIGIT_LENGTH && digitInputValue === currentRandomGuess && (
-            <FireworksEffect />
-          )}
+        <div className="App" onKeyDown={(event) => this.onKeyDown(event)}>
+          <FireworksEffect
+            show={
+              digitInputValue?.length === DIGIT_LENGTH &&
+              digitInputValue === gameGuess
+            }
+          />
           <DigitInput
-            onInputChange={this.onInputChange}
+            onInputChange={(value) => this.onInputChange(value)}
             value={digitInputValue ?? ''}
           />
           <Litmus isCorrect={this.areEnteredDigitsCorrect()} />
         </div>
-        <Footer gameCount={gameRoundCount} />
+        <Footer gameRound={gameRound} history={gameHistory} hint={hint} />
       </Fragment>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  gameRound: selectGameRound(state),
+  gameGuess: selectGameGuess(state),
+  gameHistory: selectGameHistory(state)
+});
+
+const mapDispatchToProps = {
+  initiateNewGame
+};
+
+App.props = {
+  gameRound: PropTypes.number.isRequired,
+  gameGuess: PropTypes.string.isRequired,
+  initiateNewGame: PropTypes.func.isRequired
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
