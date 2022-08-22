@@ -46,13 +46,15 @@ $cross-mark-line-two-stroke-dasharray: 243.2846221923828;
     .line-one {
       fill: red;
       stroke-dasharray: $cross-mark-line-one-stroke-dasharray;
-      animation: draw-cross-line-one 0.5s linear, fill-in-cross-line-one 1s linear;
+      animation: draw-cross-line-one 0.5s linear,
+        fill-in-cross-line-one 1s linear;
     }
 
     .line-two {
       fill: red;
       stroke-dasharray: $cross-mark-line-two-stroke-dasharray;
-      animation: draw-cross-line-two 0.5s linear, fill-in-cross-line-two 1s linear;
+      animation: draw-cross-line-two 0.5s linear,
+        fill-in-cross-line-two 1s linear;
     }
   }
 }
