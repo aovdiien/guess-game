@@ -11,6 +11,11 @@
     &.hint {
       animation: 1s show-hint linear;
     }
+
+    &.reset-history:hover {
+      cursor: pointer;
+      text-decoration: underline;
+    }
   }
 }
 

@@ -6,7 +6,8 @@ import {
   initiateNewGame,
   selectGameGuess,
   selectGameRound,
-  selectGameHistory
+  selectGameHistory,
+  reset
 } from '../store/gameRegistrySlice';
 import DigitInput from './DigitInput';
 import Litmus from './Litmus';
@@ -106,7 +107,12 @@ class App extends Component {
           />
           <Litmus isCorrect={this.areEnteredDigitsCorrect()} />
         </div>
-        <Footer gameRound={gameRound} history={gameHistory} hint={hint} />
+        <Footer
+          gameRound={gameRound}
+          history={gameHistory}
+          hint={hint}
+          reset={this.props.reset}
+        />
       </Fragment>
     );
   }
@@ -119,7 +125,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  initiateNewGame
+  initiateNewGame,
+  reset
 };
 
 App.props = {

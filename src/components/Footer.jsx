@@ -54,9 +54,14 @@ class Footer extends PureComponent {
     );
   }
 
-  // eslint-disable-next-line class-methods-use-this
   renderResetHistoryLabel() {
-    return null;
+    const { history, reset } = this.props;
+
+    return history.length > 0 ? (
+      <span className="reset-history" onClick={() => reset()}>
+        Reset history.
+      </span>
+    ) : null;
   }
 
   renderHint() {
@@ -91,7 +96,8 @@ Footer.props = {
       userGuess: PropTypes.string
     })
   ).isRequired,
-  hint: PropTypes.string
+  hint: PropTypes.string,
+  reset: PropTypes.func.isRequired
 };
 
 export default Footer;

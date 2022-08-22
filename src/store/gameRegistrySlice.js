@@ -31,11 +31,12 @@ export const gameRegistrySlice = createSlice({
       ];
       state.round += 1;
       state.guess = getRandomFourDigitsString();
-    }
+    },
+    reset: () => initialState
   }
 });
 
-export const { initiateNewGame } = gameRegistrySlice.actions;
+export const { initiateNewGame, reset } = gameRegistrySlice.actions;
 
 export const selectGameHistory = (state) => state.gameRegistry.history;
 export const selectGameRound = (state) => state.gameRegistry.round;
