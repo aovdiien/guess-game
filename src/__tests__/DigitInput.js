@@ -7,7 +7,6 @@ describe('DigitInput Component: ', () => {
   const onInputChangeMock = jest.fn();
   let inputElement;
 
-  // TODO: Question: should tests also check propTypes and the actual correspondence of types ?
   beforeEach(() => {
     render(
       <DigitInput value={INPUT_VALUE} onInputChange={onInputChangeMock} />
